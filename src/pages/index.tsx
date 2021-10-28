@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { FaExternalLinkAlt } from 'react-icons/fa'
+import {
+  FaExternalLinkAlt,
+  FaSearch,
+  FaExclamation,
+  FaEllipsisH
+} from 'react-icons/fa'
 
 import styles from '../styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
@@ -22,7 +27,12 @@ export default function Home() {
 
   useEffect(fetchBoard, [])
 
-  if (!board) return <div>Loading</div>
+  if (!board)
+    return (
+      <div className={styles.main}>
+        <FaSearch size={25} className={styles.loading} />
+      </div>
+    )
 
   return (
     <div className={styles.container}>
@@ -66,24 +76,40 @@ export default function Home() {
           </div>
 
           <div className={`${styles.quadrant} ${styles.important_urgent}`}>
-            <div>
-              <span>{board.getList()[1].name}</span>
-            </div>
+            {board.getList()[1].cards.map(card => (
+                <div key={card.id} className={`${styles.exclamation} ${styles.postit}`}>
+                  <FaExclamation color="#ff1a1a"size={25} />
+                  <span className={styles.detail} />
+                </div>
+            ))}
           </div>
           <div className={`${styles.quadrant} ${styles.important_notUrgent}`}>
-            <div>
-              <span>{board.getList()[2].name}</span>
-            </div>
+            {board.getList()[2].cards.map(
+              (card, index) => index <= 7 ? (
+                  <div key={card.id} className={styles.postit}>
+                    <span className={styles.dot} />
+                    <span className={styles.detail} />
+                  </div>
+              ) : index === 8 ? (
+                <div key={card.id} className={`${styles.postit} ${styles.more}`}>
+                  <FaEllipsisH color="#aaa"size={25} />
+                </div>
+              ) : null
+            )}
           </div>
           <div className={`${styles.quadrant} ${styles.notImportant_urgent}`}>
-            <div>
-              <span>{board.getList()[3].name}</span>
-            </div>
+            {board.getList()[3].cards.map(card => (
+              <div key={card.id} className={styles.postit}>
+                <span className={styles.dot} />
+              </div>
+            ))}
           </div>
           <div className={`${styles.quadrant} ${styles.notImportant_notUrgent}`}>
-            <div>
-              <span>{board.getList()[4].name}</span>
-            </div>
+            {board.getList()[4].cards.map(card => (
+              <div key={card.id} className={styles.postit}>
+                <span className={styles.dot} />
+              </div>
+            ))}
           </div>
         </div>
       </main>
