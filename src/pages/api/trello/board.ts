@@ -1,6 +1,8 @@
+import { IBoard } from "shared/interfaces/board"
+
 require('dotenv').config()
 
-export default async function getBoards(req: any, res: any) {
+export default async function getBoards(req: any, res: any): Promise<IBoard> {
     const board = await fetch(
         `${process.env.TRELLO_BASE_URL}/boards/${process.env.BOARD_ID}?${process.env.PARAMS}`,
         {
@@ -40,6 +42,7 @@ export default async function getBoards(req: any, res: any) {
     return res.status(200).json({
         id: board.id,
         name: board.name,
+        url: board.url,
         lists: boardLists.map((list, i) => ({ ...list, cards: cards[i] }))
     })
   }
