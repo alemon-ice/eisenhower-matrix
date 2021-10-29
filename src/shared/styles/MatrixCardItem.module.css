@@ -49,3 +49,26 @@
   align-items: center;
   border-radius: 3px;
 }
+
+@media (max-width: 600px) {
+  .postit {
+    margin: 1vw;
+    width: 7vw;
+    height: 7vw;
+    border-bottom-right-radius: 5px;
+  }
+  .exclamation svg {
+    width: 3vw;
+    height: 3vw;
+  }
+  .detail {
+    width: 5px;
+    height: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #cdb518;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
