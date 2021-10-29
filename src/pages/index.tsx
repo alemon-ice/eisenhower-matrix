@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
-import {
-  FaExternalLinkAlt,
-  FaSearch,
-  FaExclamation,
-  FaEllipsisH
-} from 'react-icons/fa'
+import { FaExternalLinkAlt, FaSearch } from 'react-icons/fa'
 
-import styles from '../styles/Home.module.css'
+import styles from 'styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
 import { IBoard } from 'shared/interfaces/board'
+import { Matrix } from 'shared/components/organisms'
 
 const API_URL = 'http://localhost:3000/api'
 
@@ -50,68 +46,7 @@ export default function Home() {
           </a>
         </h1>
 
-        <div className={styles.matrix}>
-          <div className={styles.null} />
-
-          <div className={styles.horizontalAxis_urgent}>
-            <span>
-              Urgente
-            </span>
-          </div>
-          <div className={styles.horizontalAxis_notUrgent}>
-            <span>
-              Não Urgente
-            </span>
-          </div>
-
-          <div className={styles.verticalAxis_impotant}>
-            <span>
-              Importante
-            </span>
-          </div>
-          <div className={styles.verticalAxis_notImportant}>
-            <span>
-              Não Importante
-            </span>
-          </div>
-
-          <div className={`${styles.quadrant} ${styles.important_urgent}`}>
-            {board.getList()[1].cards.map(card => (
-                <div key={card.id} className={`${styles.exclamation} ${styles.postit}`}>
-                  <FaExclamation color="#ff1a1a"size={25} />
-                  <span className={styles.detail} />
-                </div>
-            ))}
-          </div>
-          <div className={`${styles.quadrant} ${styles.important_notUrgent}`}>
-            {board.getList()[2].cards.map(
-              (card, index) => index <= 7 ? (
-                  <div key={card.id} className={styles.postit}>
-                    <span className={styles.dot} />
-                    <span className={styles.detail} />
-                  </div>
-              ) : index === 8 ? (
-                <div key={card.id} className={`${styles.postit} ${styles.more}`}>
-                  <FaEllipsisH color="#aaa"size={25} />
-                </div>
-              ) : null
-            )}
-          </div>
-          <div className={`${styles.quadrant} ${styles.notImportant_urgent}`}>
-            {board.getList()[3].cards.map(card => (
-              <div key={card.id} className={styles.postit}>
-                <span className={styles.dot} />
-              </div>
-            ))}
-          </div>
-          <div className={`${styles.quadrant} ${styles.notImportant_notUrgent}`}>
-            {board.getList()[4].cards.map(card => (
-              <div key={card.id} className={styles.postit}>
-                <span className={styles.dot} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <Matrix lists={board.getList()} />
       </main>
     </div>
   )
