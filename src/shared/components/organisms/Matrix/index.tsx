@@ -2,17 +2,17 @@ import React from 'react'
 
 import { MatrixCardItem } from 'shared/components/molecules'
 import { IList } from 'shared/interfaces/board'
-import styles from 'styles/Home.module.css'
+import styles from 'shared/styles/Matrix.module.css'
 
 interface IProps {
     lists: IList[]
 }
 
 const listsStyles = [
-  'important-urgent',
-  'important-notUrgent',
-  'notImportant-urgent',
-  'notImportant-notUrgent'
+  styles['important-urgent'],
+  styles['important-notUrgent'],
+  styles['notImportant-urgent'],
+  styles['notImportant-notUrgent']
 ]
 
 const matrix: React.FC<IProps> = ({ lists }) => (

@@ -1,0 +1,65 @@
+.matrix {
+  margin-top: 1rem;
+
+  display: grid;
+  grid-template-columns: 50px 250px 250px;
+  grid-template-rows: 50px 250px 250px;
+  grid-template-areas:
+    "null horizontalAxis_urgent horizontalAxis_notUrgent"
+    "verticalAxis_impotant important-urgent important-not_urgent"
+    "verticalAxis_notImportant not_important-urgent not_important-not_urgent";
+}
+
+.null {
+  grid-area: null;
+}
+
+.important-urgent {
+  grid-area: important-urgent;
+}
+.important-notUrgent {
+  grid-area: important-not_urgent;
+}
+.notImportant-urgent {
+  grid-area: not_important-urgent;
+}
+.notImportant-notUrgent {
+  grid-area: not_important-not_urgent;
+}
+
+.horizontalAxis_urgent {
+  grid-area: horizontalAxis_urgent;
+}
+.horizontalAxis_notUrgent {
+  grid-area: horizontalAxis_notUrgent;
+}
+
+.verticalAxis_impotant {
+  grid-area: verticalAxis_impotant;
+}
+.verticalAxis_notImportant {
+  grid-area: verticalAxis_notImportant;
+}
+
+.verticalAxis_impotant,
+.verticalAxis_notImportant {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.verticalAxis_impotant span,
+.verticalAxis_notImportant span {
+  width: 250px;
+  text-align: center;
+  position: absolute;
+  transform: rotate(270deg);
+}
+
+.horizontalAxis_urgent,
+.horizontalAxis_notUrgent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

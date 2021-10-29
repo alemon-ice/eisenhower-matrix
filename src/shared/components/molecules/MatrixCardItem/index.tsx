@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaExclamation, FaEllipsisH } from 'react-icons/fa'
 
-import styles from 'styles/Home.module.css'
+import styles from 'shared/styles/MatrixCardItem.module.css'
 import { IList } from 'shared/interfaces/board'
 
 interface IProps {
@@ -17,7 +17,7 @@ const MatrixCardItem: React.FC<IProps> = ({
 }) => {
     const postitStyles = `${isMainTasks ? styles.exclamation: ''} ${styles.postit}`
     return (
-        <div className={`${styles.quadrant} ${styles[classStyles]}`}>
+        <div className={`${styles.quadrant} ${classStyles}`}>
         {list.cards.map(
             (card, index) => index <= 7 ? (
                 <div

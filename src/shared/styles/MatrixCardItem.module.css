@@ -1,0 +1,51 @@
+.quadrant {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.postit {
+  margin: 10px;
+  padding: 5px;
+  width: 53.3px;
+  height: 53.3px;
+  background-color: #eede70;
+  border-bottom-right-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.exclamation {
+  align-items: center;
+}
+
+.detail {
+  width: 10px;
+  height: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #cdb518;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: #ff1a1a;
+}
+
+.more {
+  background-color: #ccc;
+  align-items: center;
+  border-radius: 3px;
+}

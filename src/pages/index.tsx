@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import { FaExternalLinkAlt, FaSearch } from 'react-icons/fa'
 
-import styles from 'styles/Home.module.css'
+import styles from 'shared/styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
 import { IBoard } from 'shared/interfaces/board'
 import { Matrix } from 'shared/components/organisms'
