@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import Head from 'next/head'
 import { FaExternalLinkAlt, FaSearch } from 'react-icons/fa'
 
@@ -11,6 +11,8 @@ const API_URL = 'http://localhost:3000/api'
 
 export default function Home() {
   const [board, setBoard] = useState<BoardModel>()
+  const [selectedList, setSelectedList] = useState()
+  console.log({selectedList})
 
   function fetchBoard() {
     (async () => {
@@ -20,6 +22,12 @@ export default function Home() {
       setBoard(new BoardModel(boardResponse))
     })()
   }
+
+  function changeList(index: number) {
+    setSelectedList[index]
+  }
+
+  const handleChangeList = useCallback(changeList, [])
 
   useEffect(fetchBoard, [])
 
@@ -46,7 +54,7 @@ export default function Home() {
           </a>
         </h1>
 
-        <Matrix lists={board.getList()} />
+        <Matrix lists={board.getList()} handleChangeList={handleChangeList} />
       </main>
     </div>
   )

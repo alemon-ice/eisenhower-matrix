@@ -8,16 +8,22 @@ interface IProps {
     list: IList
     isMainTasks: boolean
     classStyles?: string
+
+    handleChangeList(): void
 }
 
 const MatrixCardItem: React.FC<IProps> = ({
     list,
     isMainTasks,
+    handleChangeList,
     classStyles = ''
 }) => {
     const postitStyles = `${isMainTasks ? styles.exclamation: ''} ${styles.postit}`
     return (
-        <div className={`${styles.quadrant} ${classStyles}`}>
+        <div
+            className={`${styles.quadrant} ${classStyles}`}
+            onClick={handleChangeList}
+        >
         {list.cards.map(
             (card, index) => index <= 7 ? (
                 <div

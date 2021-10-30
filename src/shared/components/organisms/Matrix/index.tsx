@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 
 import { MatrixCardItem } from 'shared/components/molecules'
 import { IList } from 'shared/interfaces/board'
@@ -6,6 +6,7 @@ import styles from 'shared/styles/Matrix.module.css'
 
 interface IProps {
     lists: IList[]
+    handleChangeList(index: number): void
 }
 
 const listsStyles = [
@@ -15,7 +16,7 @@ const listsStyles = [
   styles['notImportant-notUrgent']
 ]
 
-const matrix: React.FC<IProps> = ({ lists }) => (
+const Matrix: React.FC<IProps> = ({ lists, handleChangeList }) => (
     <div className={styles.matrix}>
       <div className={styles.null} />
 
@@ -47,9 +48,10 @@ const matrix: React.FC<IProps> = ({ lists }) => (
           key={list.id}
           isMainTasks={index === 0}
           classStyles={listsStyles[index]}
+          handleChangeList={() => handleChangeList(index)}
         />
       ))}
     </div>
 );
 
-export default matrix;
+export default Matrix;
