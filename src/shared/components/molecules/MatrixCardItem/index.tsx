@@ -20,10 +20,7 @@ const MatrixCardItem: React.FC<IProps> = ({
 }) => {
     const postitStyles = `${isMainTasks ? styles.exclamation: ''} ${styles.postit}`
     return (
-        <div
-            className={`${styles.quadrant} ${classStyles}`}
-            onClick={handleChangeList}
-        >
+        <div className={`${styles.quadrant} ${classStyles}`}>
         {list.cards.map(
             (card, index) => index <= 7 ? (
                 <div
@@ -41,6 +38,7 @@ const MatrixCardItem: React.FC<IProps> = ({
             </div>
             ) : null
         )}
+        <button className={styles.quadrantEvent} onClick={handleChangeList} />
         </div>
     );
 };

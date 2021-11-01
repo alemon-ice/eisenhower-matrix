@@ -1,18 +1,20 @@
 import { useState, useCallback, useEffect } from 'react'
 import Head from 'next/head'
-import { FaExternalLinkAlt, FaSearch } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaSearch, FaInfoCircle } from 'react-icons/fa'
 
 import styles from 'shared/styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
-import { IBoard } from 'shared/interfaces/board'
+import { IBoard, IList } from 'shared/interfaces/board'
 import { Matrix } from 'shared/components/organisms'
+import { EisenhowerMatrixDescription } from 'shared/utils/content'
 
 const API_URL = 'http://localhost:3000/api'
 
 export default function Home() {
   const [board, setBoard] = useState<BoardModel>()
-  const [selectedList, setSelectedList] = useState()
-  console.log({selectedList})
+  const [selectedList, setSelectedList] = useState<IList>()
+  const [selectedListIndex, setSelectedListIndex] = useState<number>()
+  const [activeInfo, setActiveInfo] = useState(false)
 
   function fetchBoard() {
     (async () => {
@@ -24,10 +26,21 @@ export default function Home() {
   }
 
   function changeList(index: number) {
-    setSelectedList[index]
+    setSelectedListIndex(index)
+    setSelectedList(board.getList()[index])
   }
 
-  const handleChangeList = useCallback(changeList, [])
+  function showInfo() {
+    !activeInfo && setActiveInfo(true)
+  }
+
+  function hideInfo() {
+    activeInfo && setActiveInfo(false)
+  }
+
+  const handleChangeList = useCallback(changeList, [board])
+  const handleShowInfo = useCallback(showInfo, [activeInfo, setActiveInfo])
+  const handleHideInfo = useCallback(hideInfo, [activeInfo, setActiveInfo])
 
   useEffect(fetchBoard, [])
 
@@ -54,7 +67,32 @@ export default function Home() {
           </a>
         </h1>
 
-        <Matrix lists={board.getList()} handleChangeList={handleChangeList} />
+        <div className={styles.content}>
+          <Matrix lists={board.getList()} handleChangeList={handleChangeList} />
+          {selectedList ? (
+            <ul className={styles.listCards}>
+              <div>
+                <h2>{selectedList.name}</h2>
+                <div onMouseMove={handleShowInfo} onMouseLeave={handleHideInfo}>
+                  <FaInfoCircle size={20} />
+                </div>
+              </div>
+              {activeInfo && <h3>{EisenhowerMatrixDescription[selectedListIndex]}</h3>}
+              {selectedList.cards.map(card => (
+                <li key={card.id}>
+                  <span className={styles.cardTitle}>{card.name}</span>
+                  {card.desc && <span className={styles.cardSubtitle}>{card.desc}</span>}
+                  <a
+                    href={card.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.cardLink}
+                  >Visualizar no trello</a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       </main>
     </div>
   )
