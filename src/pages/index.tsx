@@ -6,6 +6,7 @@ import styles from 'shared/styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
 import { IBoard, IList } from 'shared/interfaces/board'
 import { Matrix } from 'shared/components/organisms'
+import { ListCards } from 'shared/components/molecules';
 import { EisenhowerMatrixDescription } from 'shared/utils/content'
 
 const API_URL = 'http://localhost:3000/api'
@@ -70,27 +71,13 @@ export default function Home() {
         <div className={styles.content}>
           <Matrix lists={board.getList()} handleChangeList={handleChangeList} />
           {selectedList ? (
-            <ul className={styles.listCards}>
-              <div>
-                <h2>{selectedList.name}</h2>
-                <div onMouseMove={handleShowInfo} onMouseLeave={handleHideInfo}>
-                  <FaInfoCircle size={20} />
-                </div>
-              </div>
-              {activeInfo && <h3>{EisenhowerMatrixDescription[selectedListIndex]}</h3>}
-              {selectedList.cards.map(card => (
-                <li key={card.id}>
-                  <span className={styles.cardTitle}>{card.name}</span>
-                  {card.desc && <span className={styles.cardSubtitle}>{card.desc}</span>}
-                  <a
-                    href={card.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={styles.cardLink}
-                  >Visualizar no trello</a>
-                </li>
-              ))}
-            </ul>
+            <ListCards
+              list={selectedList}
+              listIndex={selectedListIndex}
+              activeInfo={activeInfo}
+              handleShowInfo={handleShowInfo}
+              handleHideInfo={handleHideInfo}
+            />
           ) : null}
         </div>
       </main>

@@ -60,6 +60,10 @@
   background: none;
 }
 
+.quadrantEvent:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .postit {
     margin: 1vw;
