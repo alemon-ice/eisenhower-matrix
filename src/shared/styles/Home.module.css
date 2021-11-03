@@ -19,6 +19,24 @@
   font-size: 2rem;
 }
 
+.quote {
+  font-style: italic;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.quote::before {
+  content: '"';
+}
+
+.quote::after {
+  content: '"';
+}
+
+.reference {
+  text-align: end;
+}
+
 .title a {
   font-weight: normal;
 }

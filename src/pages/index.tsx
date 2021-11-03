@@ -64,6 +64,12 @@ export default function Home() {
             <FaExternalLinkAlt size={15} />
           </a>
         </h1>
+        <span className={styles.quote}>
+          O que é importante raramente é urgente e o que é urgente raramente é importante
+        </span>
+        <span className={styles.reference}>
+          – Dwight Eisenhower, 34º Presidente Americano
+        </span>
 
         <div className={styles.content}>
           <Matrix lists={board.getList()} handleChangeList={handleChangeList} />

@@ -1,6 +1,6 @@
 export const EisenhowerMatrixDescription = {
-    '0': 'Descrição para Importante/Urgente',
-    '1': 'Descrição para Importante/Não Urgente',
-    '2': 'Descrição para Não Importante/Urgente',
-    '3': 'Descrição para Não Importante/Não Urgente',
+    '0': 'Faça isso agora.',
+    '1': 'Agende um horário para fazer isso.',
+    '2': 'Quem pode fazer isso por você?',
+    '3': 'Elimine-o.',
 }
