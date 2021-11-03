@@ -1,15 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
 import Head from 'next/head'
-import { FaExternalLinkAlt, FaSearch, FaInfoCircle } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaSearch } from 'react-icons/fa'
 
 import styles from 'shared/styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
 import { IBoard, IList } from 'shared/interfaces/board'
 import { Matrix } from 'shared/components/organisms'
 import { ListCards } from 'shared/components/molecules';
-import { EisenhowerMatrixDescription } from 'shared/utils/content'
-
-const API_URL = 'http://localhost:3000/api'
 
 export default function Home() {
   const [board, setBoard] = useState<BoardModel>()
@@ -20,7 +17,7 @@ export default function Home() {
   function fetchBoard() {
     (async () => {
       const boardResponse: IBoard =
-        await fetch(`${API_URL}/trello/board`).then(response => response.json())
+        await fetch(`api/trello/board`).then(response => response.json())
 
       setBoard(new BoardModel(boardResponse))
     })()
