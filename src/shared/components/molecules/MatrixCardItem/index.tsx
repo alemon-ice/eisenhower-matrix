@@ -1,8 +1,8 @@
 import React from 'react'
-import { FaExclamation, FaEllipsisH } from 'react-icons/fa'
 
 import styles from 'shared/styles/MatrixCardItem.module.css'
 import { IList } from 'shared/interfaces/board'
+import { Postit } from 'shared/components/atoms'
 
 interface IProps {
     list: IList
@@ -17,30 +17,18 @@ const MatrixCardItem: React.FC<IProps> = ({
     isMainTasks,
     handleChangeList,
     classStyles = ''
-}) => {
-    const postitStyles = `${isMainTasks ? styles.exclamation: ''} ${styles.postit}`
-    return (
-        <div className={`${styles.quadrant} ${classStyles}`}>
-        {list.cards.map(
-            (card, index) => index <= 7 ? (
-                <div
-                    key={card.id}
-                    className={postitStyles}
-                >
-                {isMainTasks ? (
-                    <FaExclamation color="#ff1a1a"size={25} />
-                ) : <span className={styles.dot} />}
-                <span className={styles.detail} />
-                </div>
-            ) : index === 8 ? (
-            <div key={card.id} className={`${styles.postit} ${styles.more}`}>
-                <FaEllipsisH color="#aaa"size={25} />
-            </div>
-            ) : null
-        )}
-        <button className={styles.quadrantEvent} onClick={handleChangeList} />
-        </div>
-    );
-};
+}) => (
+    <div onClick={handleChangeList} className={`${styles.quadrant} ${classStyles}`}>
+        {list.cards.map((card, index) => (
+            <Postit
+                key={card.id}
+                card={card}
+                index={index}
+                isMainTasks={isMainTasks}
+                handleChangeList={handleChangeList}
+            />
+        ))}
+    </div>
+);
 
 export default MatrixCardItem;
