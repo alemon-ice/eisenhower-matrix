@@ -5,6 +5,7 @@ import { AiFillCaretRight, AiFillCaretLeft } from 'react-icons/ai';
 import styles from 'shared/styles/ListSchedules.module.css'
 import { IList } from 'shared/interfaces/board';
 import { EisenhowerMatrixDescription } from 'shared/utils/content';
+import { formatDateInCards } from 'shared/utils/formatting';
 import { PlaceholderForLists } from 'shared/components/atoms'
 
 interface IProps {
@@ -51,7 +52,16 @@ const ListSchedules: React.FC<IProps> = ({ list }) => {
           {!!list.cards.length ? list.cards.map(card => (
             <li key={card.id}>
               <span className={styles.cardTitle}>{card.name}</span>
-              {card.desc && <span className={styles.cardSubtitle}>{card.desc}</span>}
+              {!!card.desc ? <span className={styles.cardSubtitle}>{card.desc}</span> : null}
+              {!!card.due ? (
+                <div className={styles.dateWrapper}>
+                  <span className={styles.cardDate}>{formatDateInCards(card.due)}</span>
+                  <div className={styles.checkboxWrapper}>
+                    <span className={styles.checkboxLabel}>concluído?</span>
+                    <input type="checkbox" name="" id="" className={styles.checkbox} />
+                  </div>
+                </div>
+              ) : null}
               <a
                 href={card.url}
                 target="_blank"
