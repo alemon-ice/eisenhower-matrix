@@ -6,19 +6,21 @@ export default class Board {
     private name: string
     private lists: IList[]
 
-    getId() {
+    private selectedMatrixListIndex?: number
+
+    get getId() {
         return this.id
     }
 
-    getUrl() {
+    get getUrl() {
         return this.url
     }
 
-    getName() {
+    get getName() {
         return this.name
     }
 
-    getList() {
+    get matrixList() {
         const matrixList = [
             this.lists.find(list => list.name.includes('[1]')),
             this.lists.find(list => list.name.includes('[2]')),
@@ -28,10 +30,38 @@ export default class Board {
         return matrixList
     }
 
-    constructor(board: IBoard) {
+    get selectedMatrixList() {
+        return this.matrixList[this.selectedMatrixListIndex]
+    }
+
+    get schedulesList() {
+        const schedulesList =
+            this.lists.find(list => list.name.includes('[SCHEDULES]'))
+        return schedulesList
+    }
+
+    get hasSchedules() {
+        return !!this.schedulesList.cards.length
+    }
+
+    get selectedMatrixIndex() {
+        return this.selectedMatrixListIndex
+    }
+
+    selectMatrixList(index: number) {
+        return new Board({
+            id: this.id,
+            url: this.url,
+            name: this.name,
+            lists: this.lists,
+        }, index)
+    }
+
+    constructor(board: IBoard, selectedMatrixListIndex?: number) {
         this.id = board.id
         this.url = board.url
         this.name = board.name
         this.lists = board.lists
+        this.selectedMatrixListIndex = selectedMatrixListIndex
     }
 }
