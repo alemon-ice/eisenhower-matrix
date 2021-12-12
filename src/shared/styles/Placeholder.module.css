@@ -1,0 +1,28 @@
+.placeholderWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.message {
+  margin-top: 25px;
+}
+
+.icon {
+  position: absolute;
+
+  animation: animate-icon 2s infinite;
+}
+
+@keyframes animate-icon {
+  from {
+    margin-top: 0px;
+  }
+  50% {
+    margin-top: 5px;
+  }
+  to {
+    margin-top: 0px;
+  }
+}
