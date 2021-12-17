@@ -1,8 +1,8 @@
 import React from 'react';
-import { FaExclamation, FaEllipsisH } from 'react-icons/fa'
 
+import { FaExclamation, FaEllipsisH } from 'shared/utils/external-components'
 import styles from 'shared/styles/Postit.module.css'
-import { ICard } from 'shared/interfaces/board';
+import { ICard } from 'shared/interfaces/card';
 
 interface IProps {
     card: ICard

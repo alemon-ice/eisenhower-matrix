@@ -1,11 +1,12 @@
 import { useState, useCallback, useEffect } from 'react'
 import Head from 'next/head'
-import { FaExternalLinkAlt, FaSearch } from 'react-icons/fa'
+import { FaExternalLinkAlt, FaSearch } from 'shared/utils/external-components'
 
 import styles from 'shared/styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
 import { IBoard } from 'shared/interfaces/board'
 import { fetchBoardService } from 'shared/services/board.service'
+import { ToastContainer } from 'shared/utils/external-components'
 import { Matrix } from 'shared/components/organisms'
 import { ListSchedules, ListCards } from 'shared/components/molecules'
 
@@ -24,6 +25,7 @@ export default function Home() {
   }
 
   const handleChangeList = useCallback(changeList, [board])
+  const handleRefetch = useCallback(fetchBoard, [])
 
   useEffect(fetchBoard, [])
 
@@ -57,13 +59,14 @@ export default function Home() {
         </span>
 
         <div className={styles.content}>
-          <ListSchedules list={board.schedulesList} />
+          <ListSchedules list={board.schedulesList} refetch={handleRefetch} />
           <Matrix lists={board.matrixList} handleChangeList={handleChangeList} />
           {board.selectedMatrixList ? (
             <ListCards list={board.selectedMatrixList} listIndex={board.selectedMatrixIndex} />
           ) : null}
         </div>
       </main>
+      <ToastContainer />
     </div>
   )
 }

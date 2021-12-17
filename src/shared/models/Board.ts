@@ -37,6 +37,10 @@ export default class Board {
     get schedulesList() {
         const schedulesList =
             this.lists.find(list => list.name.includes('[SCHEDULES]'))
+
+        schedulesList.cards = schedulesList.cards.filter(
+            schedule => !schedule.dueComplete
+        )
         return schedulesList
     }
 

@@ -1,0 +1,35 @@
+.cardTitle {
+  font-size: 1rem;
+}
+
+.cardSubtitle,
+.cardDate,
+.checkboxLabel {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.dateWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkboxWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.checkbox {
+  margin: 10px 0 0 10px;
+}
+
+.cardLink {
+  margin-top: 10px;
+  font-size: 11px;
+  text-align: end;
+  text-decoration: underline;
+  color: blue;
+}

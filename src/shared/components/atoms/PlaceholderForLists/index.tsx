@@ -1,4 +1,4 @@
-import { BsEmojiLaughing } from 'react-icons/bs'
+import { BsEmojiLaughing } from 'shared/utils/external-components'
 
 import styles from 'shared/styles/Placeholder.module.css'
 

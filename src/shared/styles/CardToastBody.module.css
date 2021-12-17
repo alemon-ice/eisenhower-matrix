@@ -1,0 +1,12 @@
+.toastContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.toastContentButton {
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+  color: #fff;
+}

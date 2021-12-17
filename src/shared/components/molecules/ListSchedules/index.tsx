@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
-import { FaInfoCircle } from 'react-icons/fa';
-import { AiFillCaretRight, AiFillCaretLeft } from 'react-icons/ai';
+import React, { useCallback, useState } from 'react';
 
 import styles from 'shared/styles/ListSchedules.module.css'
 import { IList } from 'shared/interfaces/board';
+import { markTaskAsCompleted } from 'shared/services/card.service'
 import { EisenhowerMatrixDescription } from 'shared/utils/content';
-import { formatDateInCards } from 'shared/utils/formatting';
-import { PlaceholderForLists } from 'shared/components/atoms'
+import { Card, PlaceholderForLists } from 'shared/components/atoms'
+import {
+  FaInfoCircle,
+  AiFillCaretRight,
+  AiFillCaretLeft
+} from 'shared/utils/external-components';
 
 interface IProps {
     list: IList
+    refetch(): void
 }
 
-const ListSchedules: React.FC<IProps> = ({ list }) => {
+const ListSchedules: React.FC<IProps> = ({ list, refetch }) => {
   const [activeInfo, setActiveInfo] = useState(false)
   const [visible, setVisible] = useState(false)
   const [animation, setAnimation] = useState(styles.hideSchedulesList)
@@ -34,6 +38,21 @@ const ListSchedules: React.FC<IProps> = ({ list }) => {
     setAnimation(visible ? styles.hideSchedulesList : styles.showSchedulesList)
   }
 
+  function completeTask(cardId: string) {
+    (async () => {
+      try {
+        const findCard = list.cards.find(item => item.id === cardId)
+        await markTaskAsCompleted(findCard)
+      } catch (err) {
+        console.error({completeTaskError: err})
+      } finally {
+        refetch()
+      }
+    })()
+  }
+
+  const handleCompleteTask = useCallback(completeTask, [list.cards, refetch])
+
   return (
     <div className={styles.container}>
       <div className={styles.animated} id={animation}>
@@ -49,27 +68,9 @@ const ListSchedules: React.FC<IProps> = ({ list }) => {
               {EisenhowerMatrixDescription['SCHEDULES']}
             </h3>
           )}
-          {!!list.cards.length ? list.cards.map(card => (
-            <li key={card.id}>
-              <span className={styles.cardTitle}>{card.name}</span>
-              {!!card.desc ? <span className={styles.cardSubtitle}>{card.desc}</span> : null}
-              {!!card.due ? (
-                <div className={styles.dateWrapper}>
-                  <span className={styles.cardDate}>{formatDateInCards(card.due)}</span>
-                  <div className={styles.checkboxWrapper}>
-                    <span className={styles.checkboxLabel}>concluído?</span>
-                    <input type="checkbox" name="" id="" className={styles.checkbox} />
-                  </div>
-                </div>
-              ) : null}
-              <a
-                href={card.url}
-                target="_blank"
-                rel="noreferrer"
-                className={styles.cardLink}
-              >Visualizar no trello</a>
-            </li>
-          )) : <PlaceholderForLists />}
+          {!!list.cards.length
+            ? list.cards.map(card => <Card key={card.id} card={card} completeTask={handleCompleteTask} />)
+            : <PlaceholderForLists />}
         </ul>
         <div className={styles.tab}>
           <button onClick={handleChangeVisibility}>

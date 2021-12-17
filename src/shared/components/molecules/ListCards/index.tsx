@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaInfoCircle } from 'react-icons/fa';
 
+import { FaInfoCircle } from 'shared/utils/external-components';
 import styles from 'shared/styles/ListCards.module.css'
 import { IList } from 'shared/interfaces/board';
 import { EisenhowerMatrixDescription } from 'shared/utils/content';
