@@ -127,6 +127,9 @@ svg.rotateArrowTabVisible {
   from {
     transform: rotate(-180deg);
   }
+  20% {
+    transform: rotate(-180deg);
+  }
   to {
     transform: rotate(0deg);
   }
@@ -134,6 +137,9 @@ svg.rotateArrowTabVisible {
 
 @keyframes rotateArrowTabVisible {
   from {
+    transform: rotate(-180deg);
+  }
+  20% {
     transform: rotate(-180deg);
   }
   to {

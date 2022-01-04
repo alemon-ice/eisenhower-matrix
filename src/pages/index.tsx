@@ -6,12 +6,13 @@ import styles from 'shared/styles/Home.module.css'
 import BoardModel from 'shared/models/Board'
 import { IBoard } from 'shared/interfaces/board'
 import { fetchBoardService } from 'shared/services/board.service'
-import { ToastContainer } from 'shared/utils/external-components'
+import { ToastContainer, BiRefresh } from 'shared/utils/external-components'
 import { Matrix } from 'shared/components/organisms'
 import { ListSchedules, ListCards } from 'shared/components/molecules'
 
 export default function Home() {
   const [board, setBoard] = useState<BoardModel>()
+  const [refreshing, setRefreshing] = useState(false)
 
   function fetchBoard() {
     (async () => {
@@ -24,8 +25,23 @@ export default function Home() {
     setBoard(board.selectMatrixList(index))
   }
 
+  function refresh() {
+    (async () => {
+      try {
+        setRefreshing(true)
+        fetchBoard()
+      } catch (err) {
+        console.error({ refreshError: err })
+      } finally {
+        setTimeout(() => {
+          setRefreshing(false)
+        }, 2000)
+      }
+    })()
+  }
+
   const handleChangeList = useCallback(changeList, [board])
-  const handleRefetch = useCallback(fetchBoard, [])
+  const handleRefresh = useCallback(fetchBoard, [])
 
   useEffect(fetchBoard, [])
 
@@ -59,12 +75,16 @@ export default function Home() {
         </span>
 
         <div className={styles.content}>
-          <ListSchedules list={board.schedulesList} refetch={handleRefetch} />
+          <ListSchedules list={board.schedulesList} refresh={handleRefresh} />
           <Matrix lists={board.matrixList} handleChangeList={handleChangeList} />
           {board.selectedMatrixList ? (
             <ListCards list={board.selectedMatrixList} listIndex={board.selectedMatrixIndex} />
           ) : null}
         </div>
+
+        <button className={styles.refreshButton} onClick={refresh} disabled={refreshing}>
+          <BiRefresh className={refreshing && styles.refreshingPage} size={20} />
+        </button>
       </main>
       <ToastContainer />
     </div>

@@ -9,3 +9,4 @@ export {
 } from 'react-icons/fa'
 export { AiFillCaretRight, AiFillCaretLeft } from 'react-icons/ai'
 export { BsEmojiLaughing } from 'react-icons/bs'
+export { BiRefresh } from 'react-icons/bi'

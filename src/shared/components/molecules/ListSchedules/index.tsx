@@ -13,10 +13,10 @@ import {
 
 interface IProps {
     list: IList
-    refetch(): void
+    refresh(): void
 }
 
-const ListSchedules: React.FC<IProps> = ({ list, refetch }) => {
+const ListSchedules: React.FC<IProps> = ({ list, refresh }) => {
   const [activeInfo, setActiveInfo] = useState(false)
   const [visible, setVisible] = useState(false)
   const [animation, setAnimation] = useState(styles.hideSchedulesList)
@@ -46,12 +46,12 @@ const ListSchedules: React.FC<IProps> = ({ list, refetch }) => {
       } catch (err) {
         console.error({completeTaskError: err})
       } finally {
-        refetch()
+        refresh()
       }
     })()
   }
 
-  const handleCompleteTask = useCallback(completeTask, [list.cards, refetch])
+  const handleCompleteTask = useCallback(completeTask, [list.cards, refresh])
 
   return (
     <div className={styles.container}>

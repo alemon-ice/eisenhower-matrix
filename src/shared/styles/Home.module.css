@@ -51,6 +51,29 @@
   word-break: break-word;
 }
 
+.refreshButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 0;
+  background-color: transparent;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.refreshingPage {
+  animation: refreshing-page 1s infinite;
+}
+
+@keyframes refreshing-page {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes loading-icon {
   from {
     width: 15px;
