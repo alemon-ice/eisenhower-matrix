@@ -75,7 +75,7 @@ export default function Home() {
         </span>
 
         <div className={styles.content}>
-          <ListSchedules list={board.schedulesList} refresh={handleRefresh} />
+          {/* <ListSchedules list={board.schedulesList} refresh={handleRefresh} /> */}
           <Matrix lists={board.matrixList} handleChangeList={handleChangeList} />
           {board.selectedMatrixList ? (
             <ListCards list={board.selectedMatrixList} listIndex={board.selectedMatrixIndex} />
