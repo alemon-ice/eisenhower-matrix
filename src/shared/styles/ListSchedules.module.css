@@ -109,6 +109,13 @@ svg.rotateArrowTabVisible {
   }
 }
 
+@media (min-width: 1100px) {
+  .listCards {
+    overflow-y: scroll;
+    padding-right: 8px;
+  }
+}
+
 @keyframes showSchedulesList {
   from {
     transform: translateX(-25vw);

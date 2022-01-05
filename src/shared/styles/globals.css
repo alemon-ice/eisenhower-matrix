@@ -18,3 +18,12 @@ ul {
 * {
   box-sizing: border-box;
 }
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 50px;
+}
