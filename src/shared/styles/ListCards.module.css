@@ -54,12 +54,6 @@
 
 @media (max-width: 1100px) {
   .listCards {
-    max-width: 30vw;
-  }
-}
-
-@media (max-width: 800px) {
-  .listCards {
     position: relative;
     max-width: 100%;
     padding: 0;
